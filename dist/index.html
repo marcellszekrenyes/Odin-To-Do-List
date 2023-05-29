@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../styles.css">
+    <script type="module" src="./../src/index.js" defer></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="mainContainer">
+        <div id="headerContainer">
+            <h1 id="title">To-Do-List</h1>
+        </div>
+        <div id="contentContainer">
+            <div id="listContainer">
+                <div id="listHeader">
+                    <div>Name</div>
+                    <div>Description</div>
+                    <div><input type="radio" name="sort" id="categoryRadio" value="category"  class="radio">
+                        <label for="categoryRadio" class="radioLabel">Category</label></div>
+                    <div><input type="radio" name="sort" id="priorityRadio" value="priority"  class="radio">
+                        <label for="priorityRadio" class="radioLabel">Priority</label></div>
+                    <div><input type="radio" name="sort" id="deadlineRadio" value="deadline"  class="radio" checked>
+                        <label for="deadlineRadio" class="radioLabel">Deadline</label></div>
+                    <div id="filterIcon">FilterIcon</div>
+                    <div id="addIcon">+</div>
+                </div>
+                <div id="domListContainer"></div>
+            </div>
+            <form action="" id="addTaskForm">
+                <label for="name">name</label>
+                <input type="text" name="name" id="name" required>
+                <label for="description">description</label>
+                <input type="text" name="description" id="description" required>
+                <label for="category">category</label>
+                <input type="text" name="category" id="category" required>
+                <label for="priority">priority</label>
+                <input type="text" list="priorities" name="priority" id="priority">
+                <datalist id="priorities">
+                    <option value="Low">
+                    <option value="Medium">
+                    <option value="High">
+                </datalist>
+                <label for="deadline">deadline</label>
+                <input type="date" name="deadline" id="deadline" required>
+                <button type="submit" id="addButton">Add</button>
+            </form>
+            <form action="" id="filterForm">
+                <label for="categoryFilter">category</label>
+                <input type="text" name="categoryFilter" id="categoryFilter" required>
+                <fieldset>
+                    <legend>Priority</legend>
+                    <label for="lowPriority">Low</label>
+                    <input type="checkbox" name="low" id="lowPriority" checked>
+                    <label for="mediumPriority">Medium</label>
+                    <input type="checkbox" name="medium" id="mediumPriority" checked>
+                    <label for="highPriority">High</label>
+                    <input type="checkbox" name="high" id="highPriority" checked>
+                </fieldset>
+                <label for="deadline">deadline</label>
+                <input type="date" name="deadlineFilter" id="deadlineFilter" required>
+                <button type="submit" id="filterButton">Filter</button>
+            </form>
+        </div>
+        <div id="footerContainer"></div>
+    </div>
+</body>
+</html>
