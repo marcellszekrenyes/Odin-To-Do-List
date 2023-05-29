@@ -1,6 +1,6 @@
 import {newTask} from './taskController.js';
 import {addTask, removeTask, returnList, returnTask} from './taskList.js';
-import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, getInput, generateDomList, resetDomList, filterDomList, sortDomList} from './domController.js';
+import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab,  getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter} from './domController.js';
 
 
 
@@ -30,4 +30,9 @@ filterButton.addEventListener('click', (e) => {
     generateDomList(sortDomList(filterDomList(returnList())));
     console.log(returnList());
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+})
+
+todayTab.addEventListener('click', () => {
+    resetDomList();
+    generateDomList(todayFilter(returnList()));
 })

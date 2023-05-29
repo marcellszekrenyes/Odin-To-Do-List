@@ -15,12 +15,38 @@
             <h1 id="title">To-Do-List</h1>
         </div>
         <div id="contentContainer">
+            <div id="sidebarContainer">
+                <div class="sidebarTab" id="today">
+                    <img src="./Media/Icons/Bookshelf.svg" alt="Bookshelf icon" class="icons">
+                    <h4>Today</h4>
+                </div>
+                <div class="sidebarTab">
+                    <img src="./Media/Icons/Newspaper.svg" alt="Newspaper icon" class="icons">
+                    <h4>Tomorrow</h4>
+                </div>
+                <div class="sidebarTab">
+                    <img src="./Media/Icons/Chef.svg" alt="Chef hat icon" class="icons">
+                    <h4>This week</h4>
+                </div>
+                <div class="sidebarTab">
+                    <img src="./Media/Icons/Youtube.svg" alt="Youtube icon" class="icons">
+                    <h4>Projects</h4>
+                </div>
+                <div class="sidebarTab">
+                    <img src="./Media/Icons/Film.svg" alt="Movie icon" class="icons">
+                    <h4>Movies</h4>
+                </div>
+                <div class="sidebarTab">
+                    <img src="./Media/Icons/Earbuds.svg" alt="Earbuds icon" class="icons">
+                    <h4>Songs</h4>
+                </div>
+            </div>
             <div id="listContainer">
                 <div id="listHeader">
                     <div>Name</div>
                     <div>Description</div>
-                    <div><input type="radio" name="sort" id="categoryRadio" value="category"  class="radio">
-                        <label for="categoryRadio" class="radioLabel">Category</label></div>
+                    <div><input type="radio" name="sort" id="projectRadio" value="project"  class="radio">
+                        <label for="projectRadio" class="radioLabel">Project</label></div>
                     <div><input type="radio" name="sort" id="priorityRadio" value="priority"  class="radio">
                         <label for="priorityRadio" class="radioLabel">Priority</label></div>
                     <div><input type="radio" name="sort" id="deadlineRadio" value="deadline"  class="radio" checked>
@@ -35,8 +61,8 @@
                 <input type="text" name="name" id="name" required>
                 <label for="description">description</label>
                 <input type="text" name="description" id="description" required>
-                <label for="category">category</label>
-                <input type="text" name="category" id="category" required>
+                <label for="project">Project</label>
+                <input type="text" name="project" id="project" required>
                 <label for="priority">priority</label>
                 <input type="text" list="priorities" name="priority" id="priority">
                 <datalist id="priorities">
@@ -49,8 +75,8 @@
                 <button type="submit" id="addButton">Add</button>
             </form>
             <form action="" id="filterForm">
-                <label for="categoryFilter">category</label>
-                <input type="text" name="categoryFilter" id="categoryFilter" required>
+                <label for="projectFilter">Project</label>
+                <input type="text" name="projectFilter" id="projectFilter" required>
                 <fieldset>
                     <legend>Priority</legend>
                     <label for="lowPriority">Low</label>

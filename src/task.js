@@ -2,10 +2,10 @@ const task = {
     isFinished: false,
     date: new Date(),
 
-    init: function(name, description, category, priority, deadline) {
+    init: function(name, description, project, priority, deadline) {
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.project = project;
         this.priority = priority;
         this.deadline = deadline;
     },
@@ -26,12 +26,12 @@ const task = {
         this.description = description;
     },
 
-    getCategory: function(){
-        return this.category;
+    getProject: function(){
+        return this.project;
     },
 
-    setCategory: function(){
-        this.category = category;
+    setProject: function(){
+        this.project = project;
     },
 
     getPriority: function(){
