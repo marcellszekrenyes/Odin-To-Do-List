@@ -121,9 +121,70 @@ function sortDomList(taskList) {
 
             if(i >= 1) {
                 for(let j = 0; j <= orderedTaskList.length - 1; j++){
-                    if(nextItem.getDeadline() < orderedTaskList[j].getDeadline()){
+                    if(nextItem.getDeadline() <= orderedTaskList[j].getDeadline()){
+                        if(nextItem.getPriority() == 'High'){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                        }
+                        if(nextItem.getPriority() == 'Medium' && (orderedTaskList[j].getPriority() == 'Medium' || orderedTaskList[j].getPriority() == 'Low')){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                        }
+                        if(nextItem.getPriority() == 'Low' && orderedTaskList[j].getPriority() == 'Low'){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                        }
+                    }
+
+                    if(orderedTaskList.length - 1 == j){
+                        orderedTaskList.push(nextItem);
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+
+    if(sortByValue == 'priority'){
+        for(let i = 0; i <= taskList.length - 1; i++) {
+            const nextItem = taskList[i];
+            
+            if(i == 0){
+                orderedTaskList.push(nextItem);
+            }
+
+            if(i >= 1) {
+                for(let j = 0; j <= orderedTaskList.length - 1; j++){
+                    if(nextItem.getPriority() == 'High' && orderedTaskList[j].getPriority() == 'High'){
+                        if(nextItem.getDeadline() <= orderedTaskList[j].getDeadline()){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                        }
+                    }
+
+                    if(nextItem.getPriority() == 'High' && orderedTaskList[j].getPriority() != 'High'){
                         orderedTaskList.splice(j, 0, nextItem);
                         break;
+                    }
+
+                    if(nextItem.getPriority() == 'Medium' && orderedTaskList[j].getPriority() == 'Medium'){
+                        if(nextItem.getDeadline() <= orderedTaskList[j].getDeadline()){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                        }
+                    }
+
+                    if(nextItem.getPriority() == 'Medium' && orderedTaskList[j].getPriority() == 'Low'){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                    }
+
+                    if(nextItem.getPriority() == 'Low'){
+                        if(nextItem.getDeadline() <= orderedTaskList[j].getDeadline()){
+                            orderedTaskList.splice(j, 0, nextItem);
+                            break;
+                        }
                     }
 
                     if(orderedTaskList.length - 1 == j){
