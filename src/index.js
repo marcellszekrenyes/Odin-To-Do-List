@@ -14,7 +14,7 @@ addButton.addEventListener('click', (e) => {
     const input = getInput();
     addTask(newTask(input[0], input[1], input[2], input[3], input[4]));
     resetDomList();
-    generateDomList(returnList());
+    generateDomList(sortDomList(returnList()));
     console.log(returnList());
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
 });
