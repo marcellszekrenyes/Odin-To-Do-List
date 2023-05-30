@@ -18,6 +18,7 @@ const deadlineFilter = document.getElementById('deadlineFilter');
 const priorityFilter = document.getElementById('priorityFilter');
 
 const todayTab = document.getElementById('today');
+const homeTab = document.getElementById('home');
 
 const deadline = document.getElementById('deadline');
 deadline.min =  new Date().toLocaleDateString('fr-ca');
@@ -263,4 +264,4 @@ function todayFilter(taskList) {
     return orderedAndFilteredList;
 }
 
-export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter};
+export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter};
