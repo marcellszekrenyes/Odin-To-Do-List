@@ -19,12 +19,14 @@ const priorityFilter = document.getElementById('priorityFilter');
 
 const todayTab = document.getElementById('today');
 const homeTab = document.getElementById('home');
+const sidebarContainer = document.getElementById('sidebarContainer');
 
 const deadline = document.getElementById('deadline');
 deadline.min =  new Date().toLocaleDateString('fr-ca');
 deadlineFilter.min = new Date().toLocaleDateString('fr-ca');
 
 const sort = document.getElementsByName('sort');
+const tabs = document.getElementsByName('tabs');
 
 function generateDomList(taskList) {
     for(let i = 0; i <= taskList.length - 1; i++) {
@@ -264,4 +266,34 @@ function todayFilter(taskList) {
     return orderedAndFilteredList;
 }
 
-export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter};
+//Later make a module from this function!!
+function tabController(taskList) {
+    let choosenTab = "";
+    
+    if(taskList == undefined){
+        console.log('undefined');
+        return;
+    }
+
+    for(let i = 0; i <= sort.length-1; i++) {
+        if(tabs[i].checked == true) {
+            choosenTab = tabs[i].value;
+        }
+    }
+
+    switch(choosenTab) {
+        case 'home':
+            generateDomList(taskList);
+            break;
+        case 'today':
+            generateDomList(todayFilter(taskList));
+            break;
+        // case 'upcoming':
+        //     // code block
+        //     break;
+        // default:
+
+        //     // code block
+      }
+}
+export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController};

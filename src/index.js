@@ -1,13 +1,13 @@
 import {newTask} from './taskController.js';
 import {addTask, removeTask, returnList, returnTask} from './taskList.js';
-import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab,  getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter} from './domController.js';
+import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer,  getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController} from './domController.js';
 
 
 
 addIcon.addEventListener('click', () => {
     addTaskForm.setAttribute('style', 'width: 15%; height: 30%; opacity: 1; pointer-events: auto;');
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-})
+});
 
 homeTab.addEventListener('click', (e) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ addButton.addEventListener('click', (e) => {
 filterIcon.addEventListener('click', () => {
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     filterForm.setAttribute('style', 'width: 15%; height: 25%; opacity: 1; pointer-events: auto;');
-})
+});
 
 filterButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -37,9 +37,14 @@ filterButton.addEventListener('click', (e) => {
     generateDomList(sortDomList(filterDomList(returnList())));
     console.log(returnList());
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-})
+});
 
-todayTab.addEventListener('click', () => {
+// todayTab.addEventListener('click', () => {
+//     resetDomList();
+//     generateDomList(todayFilter(returnList()));
+// });
+
+sidebarContainer.addEventListener('click',  () => {
     resetDomList();
-    generateDomList(todayFilter(returnList()));
-})
+    tabController(returnList());
+});

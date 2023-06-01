@@ -53,7 +53,7 @@
 .sidebarTab {
     display: flex;
     align-items: center;
-    height: 5%;
+    height: 10%;
     width: 80%;
     font-size: 1.5rem;
 }
@@ -99,4 +99,41 @@
     grid-template-columns: 1fr 10fr 1fr 1fr 1fr 1fr 1fr;
     gap: 5%;
     width: 50%;
+}
+
+
+
+
+/*Radio button styling*/
+.radio {
+	position: relative;
+	display: block;
+}
+
+input[type="radio"] {
+    display: none;
+    position: absolute;
+    width: 100%;
+    appearance: none;
+}
+
+.radioLabel {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5em;
+    cursor: pointer;
+    color: #444444;
+    background: #DDDDDD;
+    border: 2px solid #888888;
+    text-align: center;
+}
+
+.radioLabel:hover {
+    transition: 0.3s;
+    background-color: #f8b444;
+}
+
+.radio:checked + .radioLabel{
+    transition: 0.3s;
+    background-color: #f8b444;
 }
