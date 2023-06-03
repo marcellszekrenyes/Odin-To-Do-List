@@ -1,5 +1,5 @@
+import {newTask} from './taskController.js';
 const taskList = [];
-
 
 function addTask(task) {
     taskList.push(task);

@@ -20,6 +20,7 @@ const priorityFilter = document.getElementById('priorityFilter');
 const todayTab = document.getElementById('today');
 const homeTab = document.getElementById('home');
 const sidebarContainer = document.getElementById('sidebarContainer');
+const projectContainer = document.getElementById('projectContainer');
 
 const deadline = document.getElementById('deadline');
 deadline.min =  new Date().toLocaleDateString('fr-ca');
@@ -266,6 +267,247 @@ function todayFilter(taskList) {
     return orderedAndFilteredList;
 }
 
+function upcomingFilter(taskList) {
+    const filteredList = [];
+    const orderedAndFilteredList = [];
+
+    const lastDay = new Date();
+    lastDay.setDate(lastDay.getDate() + 3);
+
+    for(let i = 0; i <= taskList.length - 1; i++) {
+        if(lastDay.toLocaleDateString('fr-ca') >= taskList[i].getDeadline()) {
+            filteredList.push(taskList[i]);
+        }
+    }
+
+    for(let i = 0; i <= filteredList.length - 1; i++) {
+        const nextItem = filteredList[i];
+        
+        if(i == 0){
+            orderedAndFilteredList.push(nextItem);
+        }
+
+        if(i >= 1) {
+            for(let j = 0; j <= orderedAndFilteredList.length - 1; j++){
+                if(nextItem.getDeadline() <= orderedAndFilteredList[j].getDeadline()){
+                    if(nextItem.getPriority() == 'High'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Medium' && (orderedAndFilteredList[j].getPriority() == 'Medium' || orderedAndFilteredList[j].getPriority() == 'Low')){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Low' && orderedAndFilteredList[j].getPriority() == 'Low'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                }
+
+                if(orderedAndFilteredList.length - 1 == j){
+                    orderedAndFilteredList.push(nextItem);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return orderedAndFilteredList;
+}
+
+function weeklyFilter(taskList) {
+    const filteredList = [];
+    const orderedAndFilteredList = [];
+    //const todaysDate = new Date().toLocaleDateString('fr-ca');
+
+    const lastDay = new Date();
+
+    while(lastDay.getDay() != 0){
+        lastDay.setDate(lastDay.getDate() + 1);
+    }
+
+    for(let i = 0; i <= taskList.length - 1; i++) {
+        if(lastDay.toLocaleDateString('fr-ca') >= taskList[i].getDeadline()) {
+            filteredList.push(taskList[i]);
+        }
+    }
+
+    for(let i = 0; i <= filteredList.length - 1; i++) {
+        const nextItem = filteredList[i];
+        
+        if(i == 0){
+            orderedAndFilteredList.push(nextItem);
+        }
+
+        if(i >= 1) {
+            for(let j = 0; j <= orderedAndFilteredList.length - 1; j++){
+                if(nextItem.getDeadline() <= orderedAndFilteredList[j].getDeadline()){
+                    if(nextItem.getPriority() == 'High'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Medium' && (orderedAndFilteredList[j].getPriority() == 'Medium' || orderedAndFilteredList[j].getPriority() == 'Low')){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Low' && orderedAndFilteredList[j].getPriority() == 'Low'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                }
+
+                if(orderedAndFilteredList.length - 1 == j){
+                    orderedAndFilteredList.push(nextItem);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return orderedAndFilteredList;
+}
+
+function monthlyFilter(taskList) {
+    const filteredList = [];
+    const orderedAndFilteredList = [];
+    //const todaysDate = new Date().toLocaleDateString('fr-ca');
+
+    const thisDay = new Date();
+    const lastDay = new Date();
+
+    while(lastDay.getMonth() == thisDay.getMonth()){
+        lastDay.setDate(lastDay.getDate() + 1);
+    }
+
+    lastDay.setDate(lastDay.getDate() - 1);
+
+    for(let i = 0; i <= taskList.length - 1; i++) {
+        if(lastDay.toLocaleDateString('fr-ca') >= taskList[i].getDeadline()) {
+            filteredList.push(taskList[i]);
+        }
+    }
+
+    for(let i = 0; i <= filteredList.length - 1; i++) {
+        const nextItem = filteredList[i];
+        
+        if(i == 0){
+            orderedAndFilteredList.push(nextItem);
+        }
+
+        if(i >= 1) {
+            for(let j = 0; j <= orderedAndFilteredList.length - 1; j++){
+                if(nextItem.getDeadline() <= orderedAndFilteredList[j].getDeadline()){
+                    if(nextItem.getPriority() == 'High'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Medium' && (orderedAndFilteredList[j].getPriority() == 'Medium' || orderedAndFilteredList[j].getPriority() == 'Low')){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Low' && orderedAndFilteredList[j].getPriority() == 'Low'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                }
+
+                if(orderedAndFilteredList.length - 1 == j){
+                    orderedAndFilteredList.push(nextItem);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return orderedAndFilteredList;
+}
+
+function projectController(taskList) {
+    resetProjectList();
+    const projectList = [];
+
+    for(let i = 0; i <= taskList.length - 1; i++) {
+        const nextItem = taskList[i];
+
+        if(i == 0){
+            projectList.push(nextItem.getProject());
+        }
+
+        if(i >= 1){
+            if(projectList.includes(nextItem.getProject())){
+                continue;
+            } else {
+                projectList.push(nextItem.getProject());
+            }
+        }
+    }
+
+    for(let i = 0; i <= projectList.length-1; i++){
+        createProject(projectList[i]);
+    }
+}
+
+function createProject(projectName) {
+    const newProject = document.createElement('div');
+    newProject.textContent = projectName;
+    projectContainer.appendChild(newProject);
+}
+
+function resetProjectList() {
+    while (projectContainer.hasChildNodes()) {
+        projectContainer.removeChild(projectContainer.firstChild);
+    }
+}
+
+function projectFilter(taskList, projectName) {
+    const filteredList = [];
+    const orderedAndFilteredList = [];
+
+    for(let i = 0; i <= taskList.length - 1; i++) {
+        if(projectName == taskList[i].getProject()) {
+            filteredList.push(taskList[i]);
+        }
+    }
+
+    for(let i = 0; i <= filteredList.length - 1; i++) {
+        const nextItem = filteredList[i];
+        
+        if(i == 0){
+            orderedAndFilteredList.push(nextItem);
+        }
+
+        if(i >= 1) {
+            for(let j = 0; j <= orderedAndFilteredList.length - 1; j++){
+                if(nextItem.getDeadline() <= orderedAndFilteredList[j].getDeadline()){
+                    if(nextItem.getPriority() == 'High'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Medium' && (orderedAndFilteredList[j].getPriority() == 'Medium' || orderedAndFilteredList[j].getPriority() == 'Low')){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                    if(nextItem.getPriority() == 'Low' && orderedAndFilteredList[j].getPriority() == 'Low'){
+                        orderedAndFilteredList.splice(j, 0, nextItem);
+                        break;
+                    }
+                }
+
+                if(orderedAndFilteredList.length - 1 == j){
+                    orderedAndFilteredList.push(nextItem);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    return orderedAndFilteredList;
+}
+
 //Later make a module from this function!!
 function tabController(taskList) {
     let choosenTab = "";
@@ -275,7 +517,7 @@ function tabController(taskList) {
         return;
     }
 
-    for(let i = 0; i <= sort.length-1; i++) {
+    for(let i = 0; i <= tabs.length - 1; i++) {
         if(tabs[i].checked == true) {
             choosenTab = tabs[i].value;
         }
@@ -283,17 +525,38 @@ function tabController(taskList) {
 
     switch(choosenTab) {
         case 'home':
+            console.log('home');
             generateDomList(taskList);
             break;
         case 'today':
+            console.log('today');
             generateDomList(todayFilter(taskList));
             break;
-        // case 'upcoming':
-        //     // code block
+        case 'upcoming':
+            console.log('upcoming');
+            generateDomList(upcomingFilter(taskList));
+            break;
+        case 'weekly':
+            console.log('weekly');
+            generateDomList(weeklyFilter(taskList));
+            break;
+        case 'monthly':
+            console.log('monthly');
+            generateDomList(monthlyFilter(taskList));
+            break;
+        // case 'project':
+        //     console.log('project');
+        //     resetProjectList();
+        //     projectController(taskList);
         //     break;
         // default:
 
         //     // code block
-      }
+    }
 }
-export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController};
+
+
+
+
+
+export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter};

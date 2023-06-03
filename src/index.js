@@ -1,6 +1,9 @@
 import {newTask} from './taskController.js';
 import {addTask, removeTask, returnList, returnTask} from './taskList.js';
-import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer,  getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController} from './domController.js';
+import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm,
+    projectContainer, todayTab, weeklyFilter, homeTab, sidebarContainer,  getInput,
+    generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController,
+    projectController, resetProjectList, createProject, projectFilter} from './domController.js';
 
 
 
@@ -9,21 +12,17 @@ addIcon.addEventListener('click', () => {
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
 });
 
-homeTab.addEventListener('click', (e) => {
-    e.preventDefault();
-    resetDomList();
-    generateDomList(sortDomList(returnList()));
-    console.log(returnList());
-});
-
 addButton.addEventListener('click', (e) => {
     e.preventDefault();
     const input = getInput();
     addTask(newTask(input[0], input[1], input[2], input[3], input[4]));
     resetDomList();
     generateDomList(sortDomList(returnList()));
+    resetProjectList();
+    projectController(returnList());
     console.log(returnList());
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+                
 });
 
 filterIcon.addEventListener('click', () => {
@@ -48,3 +47,13 @@ sidebarContainer.addEventListener('click',  () => {
     resetDomList();
     tabController(returnList());
 });
+
+projectContainer.addEventListener('click', (e) => {
+    const filteredProject = e.target.textContent;
+    console.log(filteredProject);
+    resetDomList();
+    setTimeout((e) => {
+    generateDomList(projectFilter(returnList(), filteredProject));
+}, 100);
+})
+
