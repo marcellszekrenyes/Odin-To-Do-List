@@ -6,8 +6,4 @@ function newTask(name, description, category, priority, deadline) {
     return newTask;
 }
 
-function editTask() {
-
-}
-
 export {newTask};

@@ -16,44 +16,56 @@
         </div>
         <div id="contentContainer">
             <div id="sidebarContainer">
+                <div class="categories"><img class="icons" src="./../Media/inbox.svg" alt="Inbox logo"><p>Inbox</p></div>
                 <div class="sidebarTab">
-                    <div><input type="radio" name="tabs" id="homeRadio" value="home"  class="radio">
-                        <label for="homeRadio" class="radioLabel">Home</label></div>
+                    <div>
+                        <input type="radio" name="tabs" id="homeRadio" value="home"  class="radio">
+                        <label for="homeRadio" class="radioLabel">Home</label>
+                    </div>
                 </div>
                 <div class="sidebarTab">
-                    <div><input type="radio" name="tabs" id="todayRadio" value="today"  class="radio">
-                        <label for="todayRadio" class="radioLabel">Today</label></div>
+                    <div>
+                        <input type="radio" name="tabs" id="todayRadio" value="today"  class="radio">
+                        <label for="todayRadio" class="radioLabel">Today</label>
+                    </div>
                 </div>
                 <div class="sidebarTab">
-                    <div><input type="radio" name="tabs" id="upcomingRadio" value="upcoming"  class="radio">
-                        <label for="upcomingRadio" class="radioLabel">Upcoming</label></div>
+                    <div>
+                        <input type="radio" name="tabs" id="upcomingRadio" value="upcoming"  class="radio">
+                        <label for="upcomingRadio" class="radioLabel">Upcoming</label>
+                    </div>
                 </div>
                 <div class="sidebarTab">
-                    <div><input type="radio" name="tabs" id="weeklyRadio" value="weekly"  class="radio">
-                        <label for="weeklyRadio" class="radioLabel">This week</label></div>
+                    <div>
+                        <input type="radio" name="tabs" id="weeklyRadio" value="weekly"  class="radio">
+                        <label for="weeklyRadio" class="radioLabel">This week</label>
+                    </div>
                 </div>
                 <div class="sidebarTab">
-                    <div><input type="radio" name="tabs" id="monthlyRadio" value="monthly"  class="radio">
-                        <label for="monthlyRadio" class="radioLabel">This month</label></div>
+                    <div>
+                        <input type="radio" name="tabs" id="monthlyRadio" value="monthly"  class="radio">
+                        <label for="monthlyRadio" class="radioLabel">This month</label>
+                    </div>
                 </div>
-                <div class="sidebarTab">
-                    <div>Projects</div>
+                <div class="categories">
+                    <img class="icons" id="folderContainer" src="./../Media/folders.svg" alt="Folders logo"><p>Projects</p>
                 </div>
                 <div id="projectContainer"></div>
             </div>
             <div id="listContainer">
                 <div id="listHeader">
-                    <div>Name</div>
-                    <div>Description</div>
-                    <div><input type="radio" name="sort" id="projectRadio" value="project"  class="radio">
-                        <label for="projectRadio" class="radioLabel">Project</label></div>
-                    <div><input type="radio" name="sort" id="priorityRadio" value="priority"  class="radio">
-                        <label for="priorityRadio" class="radioLabel">Priority</label></div>
-                    <div><input type="radio" name="sort" id="deadlineRadio" value="deadline"  class="radio" checked>
-                        <label for="deadlineRadio" class="radioLabel">Deadline</label></div>
-                    <div id="filterIcon">FilterIcon</div>
-                    <div id="addIcon">+</div>
+                    <div class="headerItem" id="nameHeader"><p>Name</p></div>
+                    <div class="headerItem" id="descriptionHeader"><p>Description</p></div>
+                    <div class="headerItem"><input type="radio" name="sort" id="projectRadio" value="project"  class="radio">
+                        <label for="projectRadio" class="headerLabel">Project</label></div>
+                    <div class="headerItem"><input type="radio" name="sort" id="priorityRadio" value="priority"  class="radio">
+                        <label for="priorityRadio" class="headerLabel">Priority</label></div>
+                    <div class="headerItem"><input type="radio" name="sort" id="deadlineRadio" value="deadline"  class="radio" checked>
+                        <label for="deadlineRadio" class="headerLabel">Deadline</label></div>
+                    <div id="filterIcon" class="headerItem">FilterIcon</div>
+                    <div id="addIcon" class="headerItem">+</div>
                 </div>
+                
                 <div id="domListContainer"></div>
             </div>
             <form action="" id="addTaskForm">
@@ -64,15 +76,31 @@
                 <label for="project">Project</label>
                 <input type="text" name="project" id="project" required>
                 <label for="priority">priority</label>
-                <input type="text" list="priorities" name="priority" id="priority">
-                <datalist id="priorities">
-                    <option value="Low">
-                    <option value="Medium">
-                    <option value="High">
-                </datalist>
+                <select id="priority" name="priority" required>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
                 <label for="deadline">deadline</label>
                 <input type="date" name="deadline" id="deadline" required>
                 <button type="submit" id="addButton">Add</button>
+            </form>
+            <form action="" id="editTaskForm">
+                <label for="editName">name</label>
+                <input type="text" name="editName" id="editName" required>
+                <label for="editDescription">description</label>
+                <input type="text" name="editDescription" id="editDescription" required>
+                <label for="editProject">Project</label>
+                <input type="text" name="editProject" id="editProject" required>
+                <label for="editPriority">priority</label>
+                <select id="editPriority" name="editPriority" required>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <label for="editDeadline">deadline</label>
+                <input type="date" name="editDeadline" id="editDeadline" required>
+                <button type="submit" id="editButton">Edit</button>
             </form>
             <form action="" id="filterForm">
                 <label for="projectFilter">Project</label>

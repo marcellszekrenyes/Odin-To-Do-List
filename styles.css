@@ -4,7 +4,6 @@
 
 * {
     margin: 0;
-    border: 2px solid red;
 }
 
 :root {
@@ -35,8 +34,9 @@
     display: grid;
     grid-template-columns: 1fr 9fr;
     grid-template-rows: 1fr;
-    justify-items: center;
+    justify-items: start;
     align-items: start;
+    overflow: hidden;
 }
 
 #sidebarContainer {
@@ -44,18 +44,48 @@
     flex-direction: column;
     align-items: center;
     grid-column: 1 / 2;
-    width: 100%;
-    height: 100vh;
-    border-right: 3px solid #37BEB0;
-    padding-top: 5%;
+    width: 200px;
+    height: 60vh;
+    pointer-events: none;
 }
 
 .sidebarTab {
     display: flex;
     align-items: center;
-    height: 10%;
-    width: 80%;
-    font-size: 1.5rem;
+    height: 45px;
+    width: 200px;
+    font-size: 1rem;
+    pointer-events: auto;
+}
+
+.projectTab {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 20%;
+    height: 45px;
+    width: 200px;
+    font-size: 1rem;
+    pointer-events: auto;
+}
+
+#folderLogo {
+    padding-left: 5px;
+}
+
+.categories {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #444444;
+    background-color: #DBE4F5;
+}
+
+.categories > p {
+    padding-top: 3px;
 }
 
 .icons {
@@ -96,13 +126,72 @@
 
 #listHeader {
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 5%;
-    width: 50%;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+    width: 1100px;
+    height: 10%;
+    justify-content: start;
+    align-items: center;
+}
+
+.headerItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    text-align: center;
+    color: #444444;
+    background-color: #dbf7f4;
+}
+
+.headerItem:hover {
+    background-color: #c3f1ec;
+}
+
+#filterIcon {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    bottom: 5%;
+    right: 5%;
+}
+
+#addIcon {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    bottom: 5%;
+    right: 10%;
+}
+
+.listTemplate {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+    width: 1100px;
+    height: 10%;
+    justify-content: start;
+    align-items: center;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22.5px;
+    text-align: center;
+}
+
+.listTemplate:nth-child(even) {
+    background-color: #eafdfc;
+}
+
+.listTemplate:hover {
+    background-color: #c3f1ec;
 }
 
 
-
+/* #nameHeader {
+    padding-top: 20%;
+} */
 
 /*Radio button styling*/
 .radio {
@@ -117,23 +206,57 @@ input[type="radio"] {
     appearance: none;
 }
 
-.radioLabel {
+.headerLabel {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    margin: 0.5em;
+    padding-top: 14px;
+    width: 100%;
+    height: 45px;
     cursor: pointer;
-    color: #444444;
-    background: #DDDDDD;
-    border: 2px solid #888888;
     text-align: center;
 }
 
-.radioLabel:hover {
+.radio:checked + .headerLabel{
     transition: 0.3s;
-    background-color: #f8b444;
+    background-color: #c3f1ec;
+}
+
+.radioLabel {
+    display: inline-block;
+    padding-top: 14px;
+    padding-left: 20%;
+    width: 200px;
+    height: 45px;
+    cursor: pointer;
+    text-align: start;
+}
+
+.radioLabel:hover {
+    background-color: #e9edf5;
 }
 
 .radio:checked + .radioLabel{
-    transition: 0.3s;
-    background-color: #f8b444;
+    background-color: #e9edf5;
+}
+
+.projectTab:hover {
+    background-color: #e9edf5;
+}
+
+.addHover:hover {
+    background-color: #e9edf5;  
+}
+
+#editTaskForm {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background-color: #DBF5F0;
+    border: 1px solid #37BEB0; 
 }

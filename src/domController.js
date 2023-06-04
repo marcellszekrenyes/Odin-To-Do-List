@@ -1,10 +1,11 @@
-
 const listContainer = document.getElementById('listContainer');
 const domListContainer = document.getElementById('domListContainer');
 
 const addIcon = document.getElementById('addIcon');
 const addButton = document.getElementById('addButton');
 const addTaskForm = document.getElementById('addTaskForm');
+const editTaskForm = document.getElementById('editTaskForm');
+const editButton = document.getElementById('editButton');
 
 const filterIcon = document.getElementById('filterIcon');
 const filterButton = document.getElementById('filterButton');
@@ -18,7 +19,7 @@ const deadlineFilter = document.getElementById('deadlineFilter');
 const priorityFilter = document.getElementById('priorityFilter');
 
 const todayTab = document.getElementById('today');
-const homeTab = document.getElementById('home');
+const homeTab = document.getElementById('homeRadio');
 const sidebarContainer = document.getElementById('sidebarContainer');
 const projectContainer = document.getElementById('projectContainer');
 
@@ -61,12 +62,17 @@ function createListItem(task) {
     const taskDeadline = document.createElement('div');
 
     taskName.textContent = task.getName();
+    taskName.setAttribute('class', 'listItem');
     taskDescription.textContent = task.getDescription();
+    taskDescription.setAttribute('class', 'listItem');
     taskProject.textContent = task.getProject();
+    taskProject.setAttribute('class', 'listItem');
     taskPriority.textContent = task.getPriority();
+    taskPriority.setAttribute('class', 'listItem');
     taskDeadline.textContent = task.getDeadline();
+    taskDeadline.setAttribute('class', 'listItem');
 
-    listItem.setAttribute('style', 'display: grid; gap: 5%; grid-template-columns: 1fr 3fr 1fr 1fr 1fr;');
+    listItem.setAttribute('class', 'listTemplate');
     listItem.appendChild(taskName);
     listItem.appendChild(taskDescription);
     listItem.appendChild(taskProject);
@@ -453,6 +459,7 @@ function projectController(taskList) {
 function createProject(projectName) {
     const newProject = document.createElement('div');
     newProject.textContent = projectName;
+    newProject.classList.add('projectTab');
     projectContainer.appendChild(newProject);
 }
 
@@ -508,6 +515,18 @@ function projectFilter(taskList, projectName) {
     return orderedAndFilteredList;
 }
 
+function styleProject(project) {
+    resetProjectTabs();
+    project.setAttribute('style', 'background-color: #e9edf5');
+}
+
+function resetProjectTabs() {
+    const allProjects = projectContainer.children;
+    for(let i = 0; i < allProjects.length; i++ ){
+        allProjects[i].setAttribute('style', 'background-color: #ffffff');
+    }
+}
+
 //Later make a module from this function!!
 function tabController(taskList) {
     let choosenTab = "";
@@ -555,8 +574,50 @@ function tabController(taskList) {
     }
 }
 
+function resetRadios() {
+    for(let i = 0; i <= tabs.length - 1; i++) {
+        if(tabs[i].checked == true) {
+            tabs[i].checked = false;
+        }
+    }
+}
 
+function editController(taskList, name, description, project, priority, deadline) {
+    for(let i = 0; i <= taskList.length - 1; i++) {
+        const nextItem = taskList[i];
+        if(nextItem.getName() == name && nextItem.getDescription() == description && nextItem.getProject() == project  
+        && nextItem.getPriority() == priority && nextItem.getDeadline() == deadline) {
+            const newName = document.getElementById('editName').value;
+            const newDescription = document.getElementById('editDescription').value;
+            const newProject = document.getElementById('editProject').value;
+            const newPriority = document.getElementById('editPriority').value;
+            const newDeadline = document.getElementById('editDeadline').value;
+            editTask(nextItem, newName, newDescription, newProject, newPriority, newDeadline);
+            break;
+        }
+    }
+}
 
+function editTask(task, name, description, project, priority, deadline) {
+    task.setName(name);
+    task.setDescription(description);
+    task.setProject(project);
+    task.setPriority(priority);
+    task.setDeadline(deadline);
+}
 
-
-export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter};
+function editListener(editedItem, returnList) {
+    const allChildren = editedItem.children;
+    editTaskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        editController(returnList, allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
+        resetDomList();
+        homeTab.checked = true;
+        generateDomList(sortDomList(returnList));
+        projectController(returnList);
+        console.log(returnList);
+        editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+        editTaskForm.reset();
+    }, {once: true});
+}
+export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter, resetRadios, editController, editListener};

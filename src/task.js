@@ -14,7 +14,7 @@ const task = {
         return this.name;
     },
 
-    setName: function(){
+    setName: function(name){
         this.name = name;
     },
 
@@ -30,7 +30,7 @@ const task = {
         return this.project;
     },
 
-    setProject: function(){
+    setProject: function(project){
         this.project = project;
     },
 
@@ -38,7 +38,7 @@ const task = {
         return this.priority;
     },
 
-    setPriority: function(){
+    setPriority: function(priority){
         this.priority = priority;
     },
 
@@ -46,7 +46,7 @@ const task = {
         return this.deadline;
     },
 
-    setDeadline: function(){
+    setDeadline: function(deadline){
         this.deadline = deadline;
     }, 
 
