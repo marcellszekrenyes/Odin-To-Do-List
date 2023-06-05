@@ -21,6 +21,8 @@
     width: 100vw;
     height: 10vh;
     padding-left: 1%;
+    color: #849dcb;
+    background-color: #e9edf5;
     border-bottom: 3px solid #37BEB0;
 }
 
@@ -98,6 +100,16 @@
     width: 30px;
     height: 30px;
     margin-right: 5%;
+}
+
+.bigIcons {
+    width: 60px;
+    height: 60px;
+}
+
+.plusIcon {
+    width: 70px;
+    height: 70px;
 }
 
 #addTaskForm {
