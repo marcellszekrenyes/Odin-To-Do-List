@@ -7,13 +7,7 @@ import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm,
     resetProjectTabs, editTaskForm, editButton, domListContainer, editController, editListener} from './domController.js';
 
 addIcon.addEventListener('click', () => {
-    addTaskForm.setAttribute('style', 'width: 15%; height: 30%; opacity: 1; pointer-events: auto;');
-    filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-    editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-});
-
-addIcon.addEventListener('click', () => {
-    editTaskForm.setAttribute('style', 'width: 15%; height: 30%; opacity: 1; pointer-events: auto;');
+    addTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
 });
@@ -31,21 +25,34 @@ addTaskForm.addEventListener('submit', (e) => {
     addTaskForm.reset();
 })
 
+addTaskForm.addEventListener('reset', (e) => {
+    addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+    addTaskForm.reset();
+})
+
 domListContainer.addEventListener('click', (e) => {
     const editedItem = e.target.parentNode;
-    editTaskForm.setAttribute('style', 'width: 15%; height: 25%; opacity: 1; pointer-events: auto;');
+    editTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     editListener(editedItem, returnList());
     projectController(returnList());
 });
 
+editTaskForm.addEventListener('reset', (e) => {
+    editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+    editTaskForm.reset();
+})
 
+filterForm.addEventListener('reset', (e) => {
+    filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+    filterForm.reset();
+})
 
 filterIcon.addEventListener('click', () => {
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-    filterForm.setAttribute('style', 'width: 15%; height: 25%; opacity: 1; pointer-events: auto;');
+    filterForm.setAttribute('style', 'width: 15%; height: 28%; opacity: 1; pointer-events: auto;');
 });
 
 filterButton.addEventListener('click', (e) => {

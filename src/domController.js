@@ -620,4 +620,5 @@ function editListener(editedItem, returnList) {
         editTaskForm.reset();
     }, {once: true});
 }
-export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter, resetRadios, editController, editListener};
+
+export {tabs, addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter, resetRadios, editController, editListener};
