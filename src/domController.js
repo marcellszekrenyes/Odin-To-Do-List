@@ -30,6 +30,13 @@ deadlineFilter.min = new Date().toLocaleDateString('fr-ca');
 const sort = document.getElementsByName('sort');
 const tabs = document.getElementsByName('tabs');
 
+const editorButton = document.createElement('div');
+editorButton.classList.add('editorButton');
+const pencilLogo = document.createElement('img');
+pencilLogo.setAttribute('src', "./../Media/pencil.svg");
+pencilLogo.classList.add('smallIcons');
+editorButton.appendChild(pencilLogo);
+
 function generateDomList(taskList) {
     for(let i = 0; i <= taskList.length - 1; i++) {
         const listItem = createListItem(taskList[i]);
@@ -621,4 +628,4 @@ function editListener(editedItem, returnList) {
     }, {once: true});
 }
 
-export {tabs, addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter, resetRadios, editController, editListener};
+export {tabs, addIcon, addButton, editorButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter, resetRadios, editController, editListener};

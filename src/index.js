@@ -4,7 +4,7 @@ import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm,
     projectContainer, todayTab, weeklyFilter, homeTab, sidebarContainer,  getInput,
     generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController,
     projectController, resetProjectList, createProject, projectFilter, resetRadios, styleProject,
-    resetProjectTabs, editTaskForm, editButton, domListContainer, editController, editListener} from './domController.js';
+    resetProjectTabs, editTaskForm, editButton, domListContainer, editController, editListener, editorButton} from './domController.js';
 
 addIcon.addEventListener('click', () => {
     addTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
@@ -30,13 +30,28 @@ addTaskForm.addEventListener('reset', (e) => {
     addTaskForm.reset();
 })
 
-domListContainer.addEventListener('click', (e) => {
-    const editedItem = e.target.parentNode;
+editorButton.addEventListener('click', (e) => {
+    const editedItem = e.target.parentNode.parentNode;
+    console.log(editedItem);
     editTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     editListener(editedItem, returnList());
     projectController(returnList());
+});
+
+domListContainer.addEventListener('mouseover', (e) => {
+    if(e.target.parentNode != editorButton.parentNode && e.target.parentNode != editorButton && e.target != editorButton) {
+        e.target.parentNode.appendChild(editorButton);
+    }
+});
+
+domListContainer.addEventListener('mouseleave', () => {
+    setTimeout(() => {
+        if(editorButton.parentNode != null) {
+            editorButton.parentNode.removeChild(editorButton);
+        }
+    }, 100);
 });
 
 editTaskForm.addEventListener('reset', (e) => {
