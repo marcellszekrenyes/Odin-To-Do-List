@@ -346,9 +346,8 @@ fieldset {
 }
 
 .editorButton{
-    position: absolute;
-    border-left: 2.5px solid #37BEB0;
-    right: -22.5px;
+    /* position: absolute; */
+    /* right: -22.5px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -361,7 +360,52 @@ fieldset {
     background-color: #f4846b;
 }
 
+.deleteButton{
+    /* position: absolute; */
+    /* right: -22.5px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22.5px;
+    height: 22.5px;
+    background-color: #fdd1c8;
+}
+
+.deleteButton:hover {
+    background-color: #f4846b;
+}
+
+.completeButton{
+    /* position: absolute; */
+    right: -22.5px;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    width: 22.5px;
+    height: 22.5px;
+    background-color: #fdd1c8;
+}
+
+.completeButton:hover {
+    background-color: #f4846b;
+}
+
 .smallIcons {
     width: 20px;
     height: 20px;
+    pointer-events: none;
+}
+
+.taskButtonContainer {
+    position: absolute;
+    right: -67.5px;
+    display: flex;
+    flex: 0 0 100%;
+    width: 67.5px;
+    height: 22.5px;
+    border-left: 2.5px solid #37BEB0;
+}
+
+.finished {
+    text-decoration: line-through;
 }

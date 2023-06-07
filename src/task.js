@@ -1,6 +1,4 @@
 const task = {
-    isFinished: false,
-    date: new Date(),
 
     init: function(name, description, project, priority, deadline) {
         this.name = name;
@@ -8,6 +6,8 @@ const task = {
         this.project = project;
         this.priority = priority;
         this.deadline = deadline;
+        this.isFinished = false;
+        this.date = new Date();
     },
 
     getName: function(){

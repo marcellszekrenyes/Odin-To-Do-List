@@ -1,10 +1,10 @@
-import {newTask} from './taskController.js';
-import {addTask, removeTask, returnList, returnTask} from './taskList.js';
-import {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm,
-    projectContainer, todayTab, weeklyFilter, homeTab, sidebarContainer,  getInput,
-    generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, tabController,
-    projectController, resetProjectList, createProject, projectFilter, resetRadios, styleProject,
-    resetProjectTabs, editTaskForm, editButton, domListContainer, editController, editListener, editorButton} from './domController.js';
+import {newTask, addTask, returnList} from './taskList.js';
+import {addTaskbuttons, taskButtonContainer} from './taskController.js';
+import {addIcon, addTaskForm, filterIcon, filterButton, filterForm,
+    projectContainer, homeTab, sidebarContainer,  getInput,
+    generateDomList, resetDomList, filterDomList, sortDomList, tabController,
+    projectController, projectFilter, resetRadios, styleProject,
+    resetProjectTabs, editTaskForm, domListContainer} from './domController.js';
 
 addIcon.addEventListener('click', () => {
     addTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
@@ -30,37 +30,40 @@ addTaskForm.addEventListener('reset', (e) => {
     addTaskForm.reset();
 })
 
-editorButton.addEventListener('click', (e) => {
-    const editedItem = e.target.parentNode.parentNode;
-    console.log(editedItem);
-    editTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
-    filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-    addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-    editListener(editedItem, returnList());
-    projectController(returnList());
-});
-
 domListContainer.addEventListener('mouseover', (e) => {
-    if(e.target.parentNode != editorButton.parentNode && e.target.parentNode != editorButton && e.target != editorButton) {
-        e.target.parentNode.appendChild(editorButton);
+    if(e.target.parentNode.classList.contains('listTemplate')){
+        console.log(e.target.parentNode);
+        addTaskbuttons(e.target.parentNode);
+        console.log('1');
+    }
+
+    if(e.target.classList.contains('listTemplate')){
+        console.log(e.target);
+        addTaskbuttons(e.target);
+        console.log('2');
     }
 });
 
 domListContainer.addEventListener('mouseleave', () => {
-    setTimeout(() => {
-        if(editorButton.parentNode != null) {
-            editorButton.parentNode.removeChild(editorButton);
+        if(taskButtonContainer.parentNode != null) {
+            taskButtonContainer.parentNode.removeChild(taskButtonContainer);
+            console.log('3');
         }
-    }, 100);
 });
 
-editTaskForm.addEventListener('reset', (e) => {
+editTaskForm.addEventListener('reset', () => {
     editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+    resetDomList();
+    resetProjectTabs();
+    generateDomList(sortDomList(returnList()));
     editTaskForm.reset();
 })
 
 filterForm.addEventListener('reset', (e) => {
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+    resetDomList();
+    resetProjectTabs();
+    generateDomList(sortDomList(filterDomList(returnList())));
     filterForm.reset();
 })
 
@@ -78,11 +81,6 @@ filterButton.addEventListener('click', (e) => {
     console.log(returnList());
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
 });
-
-// todayTab.addEventListener('click', () => {
-//     resetDomList();
-//     generateDomList(todayFilter(returnList()));
-// });
 
 sidebarContainer.addEventListener('click',  (e) => {
     resetDomList();
@@ -108,4 +106,3 @@ projectContainer.addEventListener('click', (e) => {
     generateDomList(projectFilter(returnList(), filteredProject));
 }, 1);
 })
-

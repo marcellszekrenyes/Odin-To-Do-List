@@ -1,3 +1,5 @@
+import {newTask, addTask, removeTask, returnList, returnTask, completeTask} from './taskList.js';
+
 const listContainer = document.getElementById('listContainer');
 const domListContainer = document.getElementById('domListContainer');
 
@@ -30,16 +32,14 @@ deadlineFilter.min = new Date().toLocaleDateString('fr-ca');
 const sort = document.getElementsByName('sort');
 const tabs = document.getElementsByName('tabs');
 
-const editorButton = document.createElement('div');
-editorButton.classList.add('editorButton');
-const pencilLogo = document.createElement('img');
-pencilLogo.setAttribute('src', "./../Media/pencil.svg");
-pencilLogo.classList.add('smallIcons');
-editorButton.appendChild(pencilLogo);
+const taskButtonContainer = document.createElement('div');
 
 function generateDomList(taskList) {
     for(let i = 0; i <= taskList.length - 1; i++) {
         const listItem = createListItem(taskList[i]);
+        if(taskList[i].getIsFinished() == true) {
+            listItem.classList.add('finished');
+        }
         domListContainer.appendChild(listItem);
     }
 }
@@ -190,7 +190,7 @@ function sortByPriority(taskList) {
     }
 
     return sortedTaskList;
-}        
+}
 
 function sortByDeadline(taskList) {
     const sortedTaskList = [];
@@ -589,43 +589,8 @@ function resetRadios() {
     }
 }
 
-function editController(taskList, name, description, project, priority, deadline) {
-    for(let i = 0; i <= taskList.length - 1; i++) {
-        const nextItem = taskList[i];
-        if(nextItem.getName() == name && nextItem.getDescription() == description && nextItem.getProject() == project  
-        && nextItem.getPriority() == priority && nextItem.getDeadline() == deadline) {
-            const newName = document.getElementById('editName').value;
-            const newDescription = document.getElementById('editDescription').value;
-            const newProject = document.getElementById('editProject').value;
-            const newPriority = document.getElementById('editPriority').value;
-            const newDeadline = document.getElementById('editDeadline').value;
-            editTask(nextItem, newName, newDescription, newProject, newPriority, newDeadline);
-            break;
-        }
-    }
-}
-
-function editTask(task, name, description, project, priority, deadline) {
-    task.setName(name);
-    task.setDescription(description);
-    task.setProject(project);
-    task.setPriority(priority);
-    task.setDeadline(deadline);
-}
-
-function editListener(editedItem, returnList) {
-    const allChildren = editedItem.children;
-    editTaskForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        editController(returnList, allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
-        resetDomList();
-        homeTab.checked = true;
-        generateDomList(sortDomList(returnList));
-        projectController(returnList);
-        console.log(returnList);
-        editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-        editTaskForm.reset();
-    }, {once: true});
-}
-
-export {tabs, addIcon, addButton, editorButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab, homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList, todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter, resetRadios, editController, editListener};
+export {tabs, addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab,
+    homeTab, sidebarContainer, projectContainer, editButton, editTaskForm, domListContainer, taskButtonContainer,
+    resetProjectTabs, styleProject, getInput, generateDomList, resetDomList, filterDomList, sortDomList,
+    todayFilter, weeklyFilter, tabController, projectController, resetProjectList, createProject, projectFilter,
+    resetRadios};
