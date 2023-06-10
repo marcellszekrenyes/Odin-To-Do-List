@@ -62,8 +62,7 @@ domListContainer.addEventListener('mouseleave', () => {
 editTaskForm.addEventListener('reset', () => {
     editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     resetDomList();
-    resetProjectTabs();
-    cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(returnList())));
+    cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
     editTaskForm.reset();
 })
 

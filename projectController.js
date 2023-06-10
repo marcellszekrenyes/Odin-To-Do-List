@@ -6,15 +6,20 @@ function projectController(taskList) {
 
     for(let i = 0; i <= taskList.length - 1; i++) {
         const nextItem = taskList[i];
+        let addProject = true;
 
         if(i == 0){
             projectList.push(nextItem.getProject());
         }
 
         if(i >= 1){
-            if(projectList.includes(nextItem.getProject())){
-                continue;
-            } else {
+            for(let i = 0; i <= projectList.length - 1; i++){
+                if(projectList[i] == nextItem.getProject()){
+                    addProject = false;
+                }
+            }
+
+            if(addProject == true){
                 projectList.push(nextItem.getProject());
             }
         }
@@ -55,4 +60,4 @@ function resetProjectList() {
     }
 }
 
-export {projectContainer, projectController};
+export {projectContainer, projectController, resetProjectList};

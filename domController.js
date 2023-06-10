@@ -149,6 +149,22 @@ function resetAdditionRules()  {
         document.getElementById('deadline').max = '';
 }
 
+function setEditRules(name, description, project, priority, deadline) {
+    document.getElementById('editName').defaultValue = name;
+    document.getElementById('editDescription').defaultValue = description;
+    document.getElementById('editProject').defaultValue = project;
+    document.getElementById('editPriority').defaultValue = priority;
+    document.getElementById('editDeadline').defaultValue = deadline;
+}
+
+function resetEditRules() {
+    document.getElementById('editName').defaultValue = '';
+    document.getElementById('editDescription').defaultValue = '';
+    document.getElementById('editProject').defaultValue = '';
+    document.getElementById('editPriority').defaultValue = '';
+    document.getElementById('editDeadline').defaultValue = '';
+}
+
 export {addIcon, addButton, addTaskForm, filterIcon, filterButton, filterForm, todayTab,
     sidebarContainer, editButton, editTaskForm, domListContainer, taskButtonContainer, listHeader, cloneList,
-    getInput, generateDomList, resetDomList, sortDomList, createListItem, setAdditionRules, resetAdditionRules};
+    getInput, generateDomList, resetDomList, sortDomList, createListItem, setAdditionRules, resetAdditionRules, setEditRules, resetEditRules};

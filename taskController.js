@@ -1,6 +1,7 @@
-import {addTaskForm, filterForm, editTaskForm, resetDomList, sortDomList, generateDomList, cloneList} from './domController.js';
+import {addTaskForm, filterForm, editTaskForm, resetDomList, generateDomList, cloneList, setEditRules, resetEditRules} from './domController.js';
 import {returnList, completeTask, removeTask, editTask} from './taskList.js';
-import {homeTab} from './filterController.js';
+import {tabs, homeTab, filterDomList} from './filterController.js';
+import {sortDomList} from './sortController.js';
 import {projectController} from './projectController.js';
 
 const taskButtonContainer = document.createElement('div');
@@ -61,26 +62,65 @@ function editController(taskList, name, description, project, priority, deadline
     }
 }
 
-function editListener(editedItem, returnList) {
+function editListener(editedItem) {
     const allChildren = editedItem.children;
+    let choosenTab = "";
+    
+    if(returnList == undefined){
+        console.log('undefined');
+        return;
+    }
+
+    for(let i = 0; i <= tabs.length - 1; i++) {
+        if(tabs[i].checked == true) {
+            choosenTab = tabs[i];
+        }
+    }
+
+    
+    const editedProject = allChildren[2].textContent;
     editTaskForm.onsubmit = function (e) {
         e.preventDefault();
-        editController(returnList, allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
-        resetDomList();
-        homeTab.checked = true;
-        generateDomList(sortDomList(returnList));
-        projectController(returnList);
-        console.log(returnList);
-        editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-        editTaskForm.reset();
+        if(choosenTab.value == 'project'){
+            editController(returnList(), allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
+            projectController(returnList());
+            if(document.getElementById(`${editedProject}`) != undefined){
+                document.getElementById(`${editedProject}`).checked = true;
+            }else{
+                projectController(returnList());
+                homeTab.checked = true;
+            }
+            
+            console.log('reset comes');
+            resetDomList();
+            console.log('reset goes');
+            cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
+            console.log('generated');
+            console.log(returnList());
+            editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+            editTaskForm.reset();
+            resetEditRules();
+        } else{
+            editController(returnList(), allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
+            projectController(returnList());
+            choosenTab.checked = true;
+            resetDomList();
+            cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
+            console.log(returnList());
+            editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+            editTaskForm.reset();
+        }   
     };
-
+    
     editTaskForm.onreset = function() {
         editTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
+        resetEditRules();
         editTaskForm.reset();
         console.log('5');
         editTaskForm.removeEventListener('submit', onsubmit);
         editTaskForm.removeEventListener('submit', onreset);
+        resetDomList();
+        cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
         console.log('6');
         return;
     };
@@ -89,23 +129,23 @@ function editListener(editedItem, returnList) {
 
 editorButton.addEventListener('click', () => {
     const editedItem = taskButtonContainer.parentNode;
+    const allChildren = editedItem.children;
     console.log(editedItem);
+    setEditRules(allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
     editTaskForm.setAttribute('style', 'width: 17.5%; height: 45%; opacity: 1; pointer-events: auto;');
     filterForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
     addTaskForm.setAttribute('style', 'width: 0; height: 0; opacity: 0; pointer-events: none;');
-    editListener(editedItem, returnList());
-    projectController(returnList());
-});  
+    editListener(editedItem);
+});
 
 completeButton.addEventListener('click', () => {
     console.log(taskButtonContainer.parentNode);
     const allChildren = taskButtonContainer.parentNode.children;
     completeTask(returnList(), allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
     resetDomList();
-    generateDomList(sortDomList(cloneList));
-    projectController(returnList());
+    cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
     console.log(returnList());
-}); 
+});
 
 taskButtonContainer.addEventListener('click', () => {
     taskButtonContainer.parentNode.removeChild(taskButtonContainer);
@@ -115,10 +155,14 @@ deleteButton.addEventListener('click', () => {
     console.log(taskButtonContainer.parentNode);
     const allChildren = taskButtonContainer.parentNode.children;
     removeTask(returnList(), allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
+    removeTask(cloneList, allChildren[0].textContent, allChildren[1].textContent, allChildren[2].textContent, allChildren[3].textContent, allChildren[4].textContent);
     resetDomList();
-    homeTab.checked = true;
-    generateDomList(sortDomList(returnList()));
-    projectController(returnList());
+    cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
+    if(cloneList.length == 0) {
+        projectController(returnList());
+        homeTab.checked = true;
+        cloneList.splice(0, cloneList.length, ...generateDomList(sortDomList(filterDomList(returnList()))));
+    }
     console.log(returnList());
 });
 
